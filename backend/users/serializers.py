@@ -6,7 +6,10 @@ from .models import User
 class CustomUserCreateSerializer(UserCreateSerializer):
     class Meta(UserCreateSerializer.Meta):
         model = User
-        fields = ('id', 'email', 'username', 'first_name', 'last_name', 'password')
+        fields = (
+            'id', 'email', 'username',
+            'first_name', 'last_name', 'password'
+        )
 
 
 class CustomUserSerializer(UserSerializer):
@@ -14,7 +17,10 @@ class CustomUserSerializer(UserSerializer):
 
     class Meta(UserSerializer.Meta):
         model = User
-        fields = ('id', 'email', 'username', 'first_name', 'last_name', 'avatar', 'is_subscribed')
+        fields = (
+            'id', 'email', 'username',
+            'first_name', 'last_name', 'avatar', 'is_subscribed'
+        )
 
     def get_is_subscribed(self, obj):
         request = self.context.get('request')
