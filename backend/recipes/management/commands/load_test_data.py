@@ -42,7 +42,7 @@ class Command(BaseCommand):
             {'name': 'Картофель', 'measurement_unit': 'г', 'amount': 500},
             {'name': 'Молоко', 'measurement_unit': 'мл', 'amount': 200},
         ]
-        
+
         recipe = Recipe.objects.create(
             author=user1,
             name='Картофельное пюре',
