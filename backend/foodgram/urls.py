@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
-from recipes.views import TagViewSet, IngredientViewSet, RecipeViewSet
+from api.views import TagViewSet, IngredientViewSet, RecipeViewSet
 
 router = DefaultRouter()
 router.register('tags', TagViewSet)
@@ -29,7 +29,6 @@ router.register('recipes', RecipeViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('api/auth/', include('djoser.urls')),
     path('api/auth/', include('djoser.urls.authtoken')),
 ]
 
