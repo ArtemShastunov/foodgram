@@ -116,6 +116,7 @@ class Favorite(models.Model):
                 name='unique_favorite'
             )
         ]
+
     def __str__(self):
         return f'{self.user} - {self.recipe}'
 
@@ -131,6 +132,7 @@ class ShoppingCart(models.Model):
         on_delete=models.CASCADE,
         related_name='shopping_cart'
     )
+
     def __str__(self):
         return f'{self.user} - {self.recipe}'
 
