@@ -72,10 +72,16 @@ DOCKER_USERNAME=artemdecide
 bash
 cd infra
 docker compose -f docker-compose.production.yml up -d
+Выполните миграции и загрузите данные:
+
+bash
+docker exec infra-backend-1 python manage.py migrate
+docker exec infra-backend-1 python manage.py load_ingredients
+docker exec infra-backend-1 python manage.py load_test_data
 Создайте суперпользователя:
 
 bash
-docker exec infra-backend-1 python manage.py createsuperuser
+docker exec -it infra-backend-1 python manage.py createsuperuser
 Проект будет доступен по адресу http://localhost.
 
 Примеры запросов к API
@@ -103,9 +109,8 @@ GET /api/recipes/
 text
 GET /api/recipes/?tags=breakfast&tags=lunch
 Документация
-Спецификация API: /api/docs/
-
-Админ-зона: /admin/
+- [Спецификация API](http://158.160.138.144/api/docs/)
+- [Развернутый проект](http://158.160.138.144)
 
 Автор
 Артём Шастунов

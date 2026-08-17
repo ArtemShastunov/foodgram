@@ -1,9 +1,29 @@
+from djoser.serializers import UserSerializer as DjoserUserSerializer
 from rest_framework import serializers
+
+from api.fields import Base64ImageField
 from recipes.models import (
     Tag, Ingredient, Recipe, RecipeIngredient
 )
 from users.models import User
-from api.fields import Base64ImageField
+
+
+class UserSerializer(DjoserUserSerializer):
+    is_subscribed = serializers.SerializerMethodField()
+
+    class Meta(DjoserUserSerializer.Meta):
+        model = User
+        fields = DjoserUserSerializer.Meta.fields + (
+            'avatar', 'is_subscribed'
+        )
+
+    def get_is_subscribed(self, obj):
+        request = self.context.get('request')
+        return (
+            request is not None
+            and request.user.is_authenticated
+            and obj.following.filter(user=request.user).exists()
+        )
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -35,25 +55,6 @@ class RecipeIngredientSerializer(serializers.ModelSerializer):
     class Meta:
         model = RecipeIngredient
         fields = ('id', 'name', 'measurement_unit', 'amount')
-
-
-class UserSerializer(serializers.ModelSerializer):
-    is_subscribed = serializers.SerializerMethodField()
-
-    class Meta:
-        model = User
-        fields = (
-            'id', 'email', 'username',
-            'first_name', 'last_name', 'avatar', 'is_subscribed'
-        )
-
-    def get_is_subscribed(self, obj):
-        request = self.context.get('request')
-        return (
-            request is not None
-            and request.user.is_authenticated
-            and obj.following.filter(user=request.user).exists()
-        )
 
 
 class RecipeListSerializer(serializers.ModelSerializer):
@@ -88,7 +89,7 @@ class RecipeListSerializer(serializers.ModelSerializer):
         return (
             request is not None
             and request.user.is_authenticated
-            and obj.shopping_cart.filter(user=request.user).exists()
+            and obj.shopping_carts.filter(user=request.user).exists()
         )
 
 

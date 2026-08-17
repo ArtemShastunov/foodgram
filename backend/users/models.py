@@ -40,9 +40,6 @@ class Subscription(models.Model):
         related_name='following'
     )
 
-    def __str__(self):
-        return f'{self.user} подписан на {self.author}'
-
     class Meta:
         verbose_name = 'Подписка'
         verbose_name_plural = 'Подписки'
@@ -52,3 +49,6 @@ class Subscription(models.Model):
                 name='unique_subscription'
             )
         ]
+
+    def __str__(self):
+        return f'{self.user} подписан на {self.author}'
