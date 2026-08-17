@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import (
+from django.contrib.admin import display
+from recipes.models import (
     Tag, Ingredient, Recipe,
     RecipeIngredient, Favorite, ShoppingCart
 )
@@ -8,6 +9,7 @@ from .models import (
 class RecipeIngredientInline(admin.TabularInline):
     model = RecipeIngredient
     extra = 1
+    min_num = 1
 
 
 @admin.register(Tag)
@@ -29,9 +31,9 @@ class RecipeAdmin(admin.ModelAdmin):
     list_filter = ('tags',)
     inlines = (RecipeIngredientInline,)
 
+    @display(description='В избранном')
     def get_favorites_count(self, obj):
         return obj.favorites.count()
-    get_favorites_count.short_description = 'В избранном'
 
 
 @admin.register(Favorite)
