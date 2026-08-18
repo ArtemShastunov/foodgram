@@ -74,7 +74,7 @@ jobs:
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
         source: "infra/docker-compose.production.yml,infra/nginx.conf"
-        target: "foodgram"
+        target: "/home/ubuntu/foodgram"
     - name: Deploy
       uses: appleboy/ssh-action@master
       with:
@@ -82,13 +82,13 @@ jobs:
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
         script: |
-          cd /home/ubuntu/foodgram
-          docker-compose pull
-          docker-compose up -d
-          docker-compose exec backend python manage.py migrate
-          docker-compose exec backend python manage.py collectstatic --noinput
-          docker-compose exec backend python manage.py load_ingredients
-          docker-compose exec backend python manage.py load_test_data
+          cd /home/ubuntu/foodgram/infra
+          docker-compose -f docker-compose.production.yml pull
+          docker-compose -f docker-compose.production.yml up -d
+          docker-compose -f docker-compose.production.yml exec backend python manage.py migrate
+          docker-compose -f docker-compose.production.yml exec backend python manage.py collectstatic --noinput
+          docker-compose -f docker-compose.production.yml exec backend python manage.py load_ingredients
+          docker-compose -f docker-compose.production.yml exec backend python manage.py load_test_data
 
   notify:
     runs-on: ubuntu-latest
