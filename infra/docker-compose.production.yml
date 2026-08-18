@@ -5,14 +5,14 @@ volumes:
 
 services:
   db:
-    image: postgres:13
+    image: postgres:15
     env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
     restart: always
 
   backend:
-    image: ${DOCKER_USERNAME}/foodgram_backend:latest
+    image: artemdecide/foodgram_backend:latest
     env_file: .env
     depends_on:
       - db
@@ -22,7 +22,7 @@ services:
     restart: always
 
   frontend:
-    image: ${DOCKER_USERNAME}/foodgram_frontend:latest
+    image: artemdecide/foodgram_frontend:latest
     env_file: .env
     volumes:
       - static_volume:/frontend_static
@@ -30,7 +30,7 @@ services:
     restart: "no"
 
   gateway:
-    image: ${DOCKER_USERNAME}/foodgram_gateway:latest
+    image: artemdecide/foodgram_gateway:latest
     env_file: .env
     depends_on:
       - backend
