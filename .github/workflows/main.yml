@@ -8,6 +8,16 @@ on:
 jobs:
   backend_tests:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: foodgram_user
+          POSTGRES_PASSWORD: foodgram_password
+          POSTGRES_DB: foodgram
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python
@@ -18,11 +28,20 @@ jobs:
       run: |
         cd backend
         pip install -r requirements.txt
+        pip install flake8
     - name: Lint
+      env:
+        POSTGRES_USER: foodgram_user
+        POSTGRES_PASSWORD: foodgram_password
+        POSTGRES_DB: foodgram
+        DB_HOST: 127.0.0.1
+        DB_PORT: 5432
       run: |
         cd backend
-        pip install flake8
         flake8 .
+        python manage.py migrate
+        python manage.py load_ingredients
+        python manage.py load_test_data
 
   build_backend:
     runs-on: ubuntu-latest
@@ -68,6 +87,8 @@ jobs:
           docker compose up -d
           docker compose exec backend python manage.py migrate
           docker compose exec backend python manage.py collectstatic --noinput
+          docker compose exec backend python manage.py load_ingredients
+          docker compose exec backend python manage.py load_test_data
 
   notify:
     runs-on: ubuntu-latest
@@ -81,3 +102,5 @@ jobs:
         message: |
           Деплой Foodgram успешен!
           Автор: ${{ github.actor }}
+          Коммит: ${{ github.event.head_commit.message }}
+          Ссылка: https://github.com/${{ github.repository }}/commit/${{ github.sha }}

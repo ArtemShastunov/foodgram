@@ -1,15 +1,25 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from foodgram.constants import (
+    MAX_LENGTH_EMAIL, MAX_LENGTH_FIRST_NAME, MAX_LENGTH_LAST_NAME
+)
+
 
 class User(AbstractUser):
     email = models.EmailField(
         'Электронная почта',
-        max_length=254,
+        max_length=MAX_LENGTH_EMAIL,
         unique=True
     )
-    first_name = models.CharField('Имя', max_length=150)
-    last_name = models.CharField('Фамилия', max_length=150)
+    first_name = models.CharField(
+        'Имя',
+        max_length=MAX_LENGTH_FIRST_NAME
+    )
+    last_name = models.CharField(
+        'Фамилия',
+        max_length=MAX_LENGTH_LAST_NAME
+    )
     avatar = models.ImageField(
         'Аватар',
         upload_to='avatars/',
@@ -32,12 +42,14 @@ class Subscription(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='follower'
+        related_name='follower',
+        verbose_name='Подписчик'
     )
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='following'
+        related_name='following',
+        verbose_name='Автор'
     )
 
     class Meta:
