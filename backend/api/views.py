@@ -1,19 +1,32 @@
-from rest_framework import viewsets, permissions, status, filters
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from django.shortcuts import get_object_or_404
-from django.http import HttpResponse
 from django.db.models import Sum
-from recipes.models import (
-    Tag, Ingredient, Recipe,
-    RecipeIngredient, Favorite, ShoppingCart
-)
-from api.serializers import (
-    TagSerializer, IngredientSerializer,
-    RecipeListSerializer, RecipeCreateSerializer
-)
-from api.permissions import IsAuthorOrReadOnly
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+from rest_framework import filters, permissions, status, viewsets
+from rest_framework.decorators import action
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
+
 from api.filters import RecipeFilter
+from api.permissions import IsAuthorOrReadOnly
+from api.serializers import (
+    IngredientSerializer,
+    RecipeCreateSerializer,
+    RecipeListSerializer,
+    TagSerializer
+)
+from recipes.models import (
+    Favorite,
+    Ingredient,
+    Recipe,
+    RecipeIngredient,
+    ShoppingCart,
+    Tag
+)
+
+
+class CustomPagination(PageNumberPagination):
+    page_size_query_param = 'limit'
+    page_size = 6
 
 
 class TagViewSet(viewsets.ReadOnlyModelViewSet):
@@ -37,6 +50,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         IsAuthorOrReadOnly
     ]
     filterset_class = RecipeFilter
+    pagination_class = CustomPagination
 
     def get_serializer_class(self):
         if self.action in ['create', 'update', 'partial_update']:
@@ -53,7 +67,10 @@ class RecipeViewSet(viewsets.ModelViewSet):
                 {'error': 'Уже добавлено'},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        return Response({'status': 'ok'}, status=status.HTTP_201_CREATED)
+        return Response(
+            {'status': 'ok'},
+            status=status.HTTP_201_CREATED
+        )
 
     def remove_relation(self, model, request, pk):
         recipe = get_object_or_404(Recipe, pk=pk)

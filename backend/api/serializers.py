@@ -10,12 +10,18 @@ from users.models import User
 
 class UserSerializer(DjoserUserSerializer):
     is_subscribed = serializers.SerializerMethodField()
+    avatar = serializers.SerializerMethodField()
 
     class Meta(DjoserUserSerializer.Meta):
         model = User
         fields = DjoserUserSerializer.Meta.fields + (
             'avatar', 'is_subscribed'
         )
+
+    def get_avatar(self, obj):
+        if obj.avatar:
+            return obj.avatar.url
+        return None
 
     def get_is_subscribed(self, obj):
         request = self.context.get('request')
