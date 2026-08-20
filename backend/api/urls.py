@@ -10,4 +10,5 @@ router.register('recipes', RecipeViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('', include('djoser.urls')),
 ]
