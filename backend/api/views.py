@@ -1,9 +1,11 @@
+import base64
+from django.core.files.base import ContentFile
 from django.db.models import Sum
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from rest_framework import filters, permissions, status, viewsets
-from rest_framework.decorators import action
-from rest_framework.pagination import PageNumberPagination
+from rest_framework.decorators import action, api_view, parser_classes
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
 
 from api.filters import RecipeFilter
@@ -12,7 +14,8 @@ from api.serializers import (
     IngredientSerializer,
     RecipeCreateSerializer,
     RecipeListSerializer,
-    TagSerializer
+    TagSerializer,
+    UserSerializer
 )
 from recipes.models import (
     Favorite,
@@ -22,27 +25,85 @@ from recipes.models import (
     ShoppingCart,
     Tag
 )
+from users.models import User
 
 
-class CustomPagination(PageNumberPagination):
-    page_size_query_param = 'limit'
-    page_size = 6
+@api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
+@parser_classes([MultiPartParser, FormParser, JSONParser])
+def avatar(request):
+    if not request.user.is_authenticated:
+        return Response(
+            {'detail': 'Учетные данные не были предоставлены.'},
+            status=status.HTTP_401_UNAUTHORIZED
+        )
+
+    if request.method == 'GET':
+        return Response(
+            {
+                'avatar': (
+                    request.user.avatar.url
+                    if request.user.avatar else None
+                )
+            },
+            status=status.HTTP_200_OK
+        )
+
+    if request.method in ['PUT', 'PATCH']:
+        avatar_data = request.data.get('avatar')
+        if not avatar_data:
+            return Response(
+                {'error': 'Поле avatar обязательно'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if isinstance(avatar_data, str) and ';base64,' in avatar_data:
+            format, imgstr = avatar_data.split(';base64,')
+            ext = format.split('/')[-1]
+            avatar_data = ContentFile(
+                base64.b64decode(imgstr),
+                name=f'avatar.{ext}'
+            )
+
+        request.user.avatar = avatar_data
+        request.user.save()
+        return Response(
+            {
+                'avatar': (
+                    request.user.avatar.url
+                    if request.user.avatar else None
+                )
+            },
+            status=status.HTTP_200_OK
+        )
+
+    if request.method == 'DELETE':
+        if request.user.avatar:
+            request.user.avatar.delete(save=False)
+        request.user.avatar = None
+        request.user.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class TagViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    pagination_class = CustomPagination
 
 
 class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    pagination_class = CustomPagination
     filter_backends = [filters.SearchFilter]
     search_fields = ['^name']
+
+
+class SubscriptionViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return User.objects.filter(following__user=self.request.user)
 
 
 class RecipeViewSet(viewsets.ModelViewSet):
@@ -52,7 +113,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
         IsAuthorOrReadOnly
     ]
     filterset_class = RecipeFilter
-    pagination_class = CustomPagination
 
     def get_serializer_class(self):
         if self.action in ['create', 'update', 'partial_update']:

@@ -29,7 +29,7 @@ class UserSerializer(DjoserUserSerializer):
         )
 
     def get_avatar(self, obj):
-        if obj.avatar:
+        if hasattr(obj, 'avatar') and obj.avatar:
             return obj.avatar.url
         return None
 
