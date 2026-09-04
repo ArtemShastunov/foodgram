@@ -9,6 +9,7 @@ from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
 
 from api.filters import RecipeFilter
+from api.pagination import CustomPagination
 from api.permissions import IsAuthorOrReadOnly
 from api.serializers import (
     IngredientSerializer,
@@ -88,12 +89,14 @@ class TagViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    pagination_class = None
 
 
 class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    pagination_class = None
     filter_backends = [filters.SearchFilter]
     search_fields = ['^name']
 
@@ -101,6 +104,7 @@ class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
 class SubscriptionViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
+    pagination_class = CustomPagination
 
     def get_queryset(self):
         return User.objects.filter(following__user=self.request.user)
@@ -113,6 +117,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         IsAuthorOrReadOnly
     ]
     filterset_class = RecipeFilter
+    pagination_class = CustomPagination
 
     def get_serializer_class(self):
         if self.action in ['create', 'update', 'partial_update']:

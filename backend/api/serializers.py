@@ -3,13 +3,13 @@ from djoser.serializers import UserCreateSerializer
 from rest_framework import serializers
 
 from api.fields import Base64ImageField
-from recipes.models import (
-    Tag, Ingredient, Recipe, RecipeIngredient
-)
+from recipes.models import Tag, Ingredient, Recipe, RecipeIngredient
 from users.models import User
 
 
 class UserCreateSerializer(UserCreateSerializer):
+    id = serializers.ReadOnlyField()
+
     class Meta(UserCreateSerializer.Meta):
         model = User
         fields = (
@@ -24,20 +24,22 @@ class UserSerializer(DjoserUserSerializer):
 
     class Meta(DjoserUserSerializer.Meta):
         model = User
-        fields = DjoserUserSerializer.Meta.fields + (
-            'avatar', 'is_subscribed'
+        fields = (
+            'id', 'email', 'username',
+            'first_name', 'last_name', 'avatar', 'is_subscribed'
         )
 
     def get_avatar(self, obj):
-        if hasattr(obj, 'avatar') and obj.avatar:
+        if obj and hasattr(obj, 'avatar') and obj.avatar:
             return obj.avatar.url
-        return None
+        return ''
 
     def get_is_subscribed(self, obj):
         request = self.context.get('request')
         return (
             request is not None
             and request.user.is_authenticated
+            and hasattr(obj, 'following')
             and obj.following.filter(user=request.user).exists()
         )
 
@@ -59,10 +61,7 @@ class RecipeIngredientSerializer(serializers.ModelSerializer):
         source='ingredient',
         queryset=Ingredient.objects.all()
     )
-    name = serializers.CharField(
-        source='ingredient.name',
-        read_only=True
-    )
+    name = serializers.CharField(source='ingredient.name', read_only=True)
     measurement_unit = serializers.CharField(
         source='ingredient.measurement_unit',
         read_only=True
@@ -111,12 +110,10 @@ class RecipeListSerializer(serializers.ModelSerializer):
 
 class RecipeCreateSerializer(serializers.ModelSerializer):
     tags = serializers.PrimaryKeyRelatedField(
-        many=True,
-        queryset=Tag.objects.all()
+        many=True, queryset=Tag.objects.all()
     )
     ingredients = RecipeIngredientSerializer(
-        source='recipe_ingredients',
-        many=True
+        source='recipe_ingredients', many=True
     )
     image = Base64ImageField()
     author = UserSerializer(read_only=True)
@@ -130,16 +127,12 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
 
     def validate_image(self, value):
         if not value:
-            raise serializers.ValidationError(
-                'Картинка обязательна'
-            )
+            raise serializers.ValidationError('Картинка обязательна')
         return value
 
     def validate(self, data):
         if not data.get('tags'):
-            raise serializers.ValidationError(
-                'Должен быть хотя бы один тег'
-            )
+            raise serializers.ValidationError('Должен быть хотя бы один тег')
         if not data.get('recipe_ingredients'):
             raise serializers.ValidationError(
                 'Должен быть хотя бы один ингредиент'
@@ -174,7 +167,4 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         return instance
 
     def to_representation(self, instance):
-        return RecipeListSerializer(
-            instance,
-            context=self.context
-        ).data
+        return RecipeListSerializer(instance, context=self.context).data

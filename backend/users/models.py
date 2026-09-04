@@ -9,17 +9,11 @@ from foodgram.constants import (
 class User(AbstractUser):
     email = models.EmailField(
         'Электронная почта',
-        max_length=MAX_LENGTH_EMAIL,
+        max_length=254,
         unique=True
     )
-    first_name = models.CharField(
-        'Имя',
-        max_length=MAX_LENGTH_FIRST_NAME
-    )
-    last_name = models.CharField(
-        'Фамилия',
-        max_length=MAX_LENGTH_LAST_NAME
-    )
+    first_name = models.CharField('Имя', max_length=150)
+    last_name = models.CharField('Фамилия', max_length=150)
     avatar = models.ImageField(
         'Аватар',
         upload_to='avatars/',
@@ -33,6 +27,7 @@ class User(AbstractUser):
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
+        ordering = ['id']
 
     def __str__(self):
         return self.email
