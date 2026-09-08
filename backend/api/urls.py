@@ -25,4 +25,11 @@ urlpatterns = [
     path('', include(router.urls)),
     path('', include('djoser.urls')),
     path('users/me/avatar/', avatar),
+    path(
+        'users/<int:pk>/subscribe/',
+        SubscriptionViewSet.as_view(
+            {'post': 'subscribe', 'delete': 'subscribe'}
+        ),
+        name='subscribe'
+    ),
 ]

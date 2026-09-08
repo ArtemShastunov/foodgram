@@ -54,12 +54,15 @@ def avatar(request):
                 {'error': 'Поле avatar обязательно'},
                 status=status.HTTP_400_BAD_REQUEST
             )
+
         if isinstance(avatar_data, str) and ';base64,' in avatar_data:
             format, imgstr = avatar_data.split(';base64,')
             ext = format.split('/')[-1]
             avatar_data = ContentFile(
-                base64.b64decode(imgstr), name=f'avatar.{ext}'
+                base64.b64decode(imgstr),
+                name=f'avatar.{ext}'
             )
+
         request.user.avatar = avatar_data
         request.user.save()
         return Response(
@@ -153,7 +156,10 @@ class RecipeViewSet(viewsets.ModelViewSet):
     )
     def get_link(self, request, pk=None):
         recipe = self.get_object()
-        return Response({'short-link': f'/recipes/{recipe.id}/'})
+        return Response(
+            {'short-link': f'/recipes/{recipe.id}/'},
+            status=status.HTTP_200_OK
+        )
 
     @action(
         detail=True,
