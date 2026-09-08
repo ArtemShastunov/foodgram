@@ -6,13 +6,15 @@ from api.views import (
     IngredientViewSet,
     RecipeViewSet,
     SubscriptionViewSet,
-    TagViewSet
+    TagViewSet,
+    UserViewSet
 )
 
 router = DefaultRouter()
 router.register('tags', TagViewSet)
 router.register('ingredients', IngredientViewSet)
 router.register('recipes', RecipeViewSet)
+router.register('users', UserViewSet, basename='users')
 router.register(
     'users/subscriptions',
     SubscriptionViewSet,

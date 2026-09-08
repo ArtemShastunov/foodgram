@@ -63,8 +63,7 @@ class RecipeIngredientSerializer(serializers.ModelSerializer):
     )
     name = serializers.CharField(source='ingredient.name', read_only=True)
     measurement_unit = serializers.CharField(
-        source='ingredient.measurement_unit',
-        read_only=True
+        source='ingredient.measurement_unit', read_only=True
     )
 
     class Meta:
@@ -76,9 +75,7 @@ class RecipeListSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True, read_only=True)
     author = UserSerializer(read_only=True)
     ingredients = RecipeIngredientSerializer(
-        source='recipe_ingredients',
-        many=True,
-        read_only=True
+        source='recipe_ingredients', many=True, read_only=True
     )
     is_favorited = serializers.SerializerMethodField()
     is_in_shopping_cart = serializers.SerializerMethodField()
@@ -116,7 +113,9 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         source='recipe_ingredients', many=True
     )
     image = Base64ImageField()
-    author = UserSerializer(read_only=True)
+    author = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
+    )
 
     class Meta:
         model = Recipe
@@ -124,6 +123,11 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
             'id', 'tags', 'author', 'ingredients',
             'name', 'image', 'text', 'cooking_time'
         )
+
+    def validate_name(self, value):
+        if len(value) > 256:
+            raise serializers.ValidationError('Название слишком длинное')
+        return value
 
     def validate_image(self, value):
         if not value:
@@ -134,9 +138,17 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         if not data.get('tags'):
             raise serializers.ValidationError('Должен быть хотя бы один тег')
         if not data.get('recipe_ingredients'):
-            raise serializers.ValidationError(
-                'Должен быть хотя бы один ингредиент'
-            )
+            raise serializers.ValidationError('Должен быть хотя бы один ингредиент')
+
+        tags = data.get('tags')
+        if len(tags) != len(set(tags)):
+            raise serializers.ValidationError('Теги не должны повторяться')
+
+        ingredients = data.get('recipe_ingredients')
+        ingredient_ids = [item['ingredient'].id for item in ingredients]
+        if len(ingredient_ids) != len(set(ingredient_ids)):
+            raise serializers.ValidationError('Ингредиенты не должны повторяться')
+
         return data
 
     def create_ingredients(self, recipe, ingredients):
