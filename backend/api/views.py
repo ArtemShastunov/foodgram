@@ -16,6 +16,7 @@ from api.serializers import (
     IngredientSerializer,
     RecipeCreateSerializer,
     RecipeListSerializer,
+    SubscriptionSerializer,
     TagSerializer,
     UserSerializer
 )
@@ -100,7 +101,7 @@ class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class SubscriptionViewSet(viewsets.ReadOnlyModelViewSet):
-    serializer_class = UserSerializer
+    serializer_class = SubscriptionSerializer
     permission_classes = [permissions.IsAuthenticated]
     pagination_class = CustomPagination
 
@@ -123,7 +124,7 @@ class SubscriptionViewSet(viewsets.ReadOnlyModelViewSet):
             if not created:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
             return Response(
-                UserSerializer(author, context=self.context).data,
+                SubscriptionSerializer(author, context=self.context).data,
                 status=status.HTTP_201_CREATED
             )
         if request.method == 'DELETE':
@@ -175,7 +176,12 @@ class RecipeViewSet(viewsets.ModelViewSet):
         if not created:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         return Response(
-            RecipeListSerializer(recipe, context=self.context).data,
+            {
+                'id': recipe.id,
+                'name': recipe.name,
+                'image': recipe.image.url if recipe.image else '',
+                'cooking_time': recipe.cooking_time
+            },
             status=status.HTTP_201_CREATED
         )
 
@@ -202,7 +208,12 @@ class RecipeViewSet(viewsets.ModelViewSet):
         if not created:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         return Response(
-            RecipeListSerializer(recipe, context=self.context).data,
+            {
+                'id': recipe.id,
+                'name': recipe.name,
+                'image': recipe.image.url if recipe.image else '',
+                'cooking_time': recipe.cooking_time
+            },
             status=status.HTTP_201_CREATED
         )
 
