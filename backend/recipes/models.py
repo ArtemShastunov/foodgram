@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 from django.db import models
 
@@ -92,6 +93,11 @@ class Recipe(models.Model):
         verbose_name = 'Рецепт'
         verbose_name_plural = 'Рецепты'
         ordering = ['-pub_date']
+
+    def save(self, *args, **kwargs):
+        if len(self.name) > 256:
+            raise ValidationError('Название слишком длинное')
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name

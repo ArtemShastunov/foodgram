@@ -21,12 +21,15 @@ class UserCreateSerializer(UserCreateSerializer):
 class UserSerializer(DjoserUserSerializer):
     is_subscribed = serializers.SerializerMethodField()
     avatar = serializers.SerializerMethodField()
+    recipes_count = serializers.SerializerMethodField()
+    recipes = serializers.SerializerMethodField()
 
     class Meta(DjoserUserSerializer.Meta):
         model = User
         fields = (
             'id', 'email', 'username',
-            'first_name', 'last_name', 'avatar', 'is_subscribed'
+            'first_name', 'last_name', 'avatar',
+            'is_subscribed', 'recipes_count', 'recipes'
         )
 
     def get_avatar(self, obj):
@@ -42,6 +45,21 @@ class UserSerializer(DjoserUserSerializer):
             and hasattr(obj, 'following')
             and obj.following.filter(user=request.user).exists()
         )
+
+    def get_recipes_count(self, obj):
+        return obj.recipes.count()
+
+    def get_recipes(self, obj):
+        recipes = obj.recipes.all()[:3]
+        return [
+            {
+                'id': recipe.id,
+                'name': recipe.name,
+                'image': recipe.image.url if recipe.image else '',
+                'cooking_time': recipe.cooking_time
+            }
+            for recipe in recipes
+        ]
 
 
 class TagSerializer(serializers.ModelSerializer):
