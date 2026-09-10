@@ -123,10 +123,11 @@ class SubscriptionViewSet(viewsets.ReadOnlyModelViewSet):
             )
             if not created:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
-            return Response(
-                SubscriptionSerializer(author, context=self.context).data,
-                status=status.HTTP_201_CREATED
+            serializer = SubscriptionSerializer(
+                author,
+                context={'request': request}
             )
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         if request.method == 'DELETE':
             deleted, _ = Subscription.objects.filter(
                 user=request.user, author=author

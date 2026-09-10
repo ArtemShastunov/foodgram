@@ -15,21 +15,19 @@ router.register('tags', TagViewSet)
 router.register('ingredients', IngredientViewSet)
 router.register('recipes', RecipeViewSet)
 router.register('users', UserViewSet, basename='users')
-router.register(
-    'users/subscriptions',
-    SubscriptionViewSet,
-    basename='subscriptions'
-)
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('', include('djoser.urls')),
-    path('users/me/avatar/', avatar),
+    path(
+        'users/subscriptions/',
+        SubscriptionViewSet.as_view({'get': 'list'}),
+        name='subscriptions'
+    ),
     path(
         'users/<int:pk>/subscribe/',
-        SubscriptionViewSet.as_view(
-            {'post': 'subscribe', 'delete': 'subscribe'}
-        ),
+        SubscriptionViewSet.as_view({'post': 'subscribe', 'delete': 'subscribe'}),
         name='subscribe'
     ),
+    path('users/me/avatar/', avatar),
+    path('', include(router.urls)),
+    path('', include('djoser.urls')),
 ]
