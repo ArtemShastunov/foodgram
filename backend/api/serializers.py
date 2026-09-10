@@ -55,7 +55,14 @@ class SubscriptionSerializer(UserSerializer):
         return obj.recipes.count()
 
     def get_recipes(self, obj):
-        recipes = obj.recipes.all()[:3]
+        request = self.context.get('request')
+        limit = 3
+        if request:
+            try:
+                limit = int(request.query_params.get('recipes_limit', 3))
+            except (ValueError, TypeError):
+                limit = 3
+        recipes = obj.recipes.all()[:limit]
         return [
             {
                 'id': recipe.id,
