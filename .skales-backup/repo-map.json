@@ -1,0 +1,1394 @@
+{
+  "entries": [
+    {
+      "relPath": "backend/api/apps.py",
+      "language": "py",
+      "symbols": [
+        "ApiConfig"
+      ],
+      "imports": [
+        "django.apps"
+      ]
+    },
+    {
+      "relPath": "backend/api/fields.py",
+      "language": "py",
+      "symbols": [
+        "Base64ImageField"
+      ],
+      "imports": [
+        "base64",
+        "django.core.files.base",
+        "rest_framework"
+      ]
+    },
+    {
+      "relPath": "backend/api/filters.py",
+      "language": "py",
+      "symbols": [
+        "RecipeFilter"
+      ],
+      "imports": [
+        "django_filters",
+        "recipes.models"
+      ]
+    },
+    {
+      "relPath": "backend/api/pagination.py",
+      "language": "py",
+      "symbols": [
+        "CustomPagination"
+      ],
+      "imports": [
+        "rest_framework.pagination"
+      ]
+    },
+    {
+      "relPath": "backend/api/permissions.py",
+      "language": "py",
+      "symbols": [
+        "IsAuthorOrReadOnly"
+      ],
+      "imports": [
+        "rest_framework"
+      ]
+    },
+    {
+      "relPath": "backend/api/serializers.py",
+      "language": "py",
+      "symbols": [
+        "UserCreateSerializer",
+        "UserSerializer",
+        "SubscriptionSerializer",
+        "TagSerializer",
+        "IngredientSerializer",
+        "RecipeIngredientSerializer",
+        "RecipeListSerializer",
+        "RecipeCreateSerializer"
+      ],
+      "imports": [
+        "djoser.serializers",
+        "rest_framework",
+        "api.fields",
+        "recipes.models",
+        "users.models"
+      ]
+    },
+    {
+      "relPath": "backend/api/urls.py",
+      "language": "py",
+      "symbols": [],
+      "imports": [
+        "django.urls",
+        "rest_framework.routers",
+        "api.views"
+      ]
+    },
+    {
+      "relPath": "backend/api/views.py",
+      "language": "py",
+      "symbols": [
+        "UserViewSet",
+        "avatar",
+        "TagViewSet",
+        "IngredientViewSet",
+        "SubscriptionViewSet",
+        "RecipeViewSet"
+      ],
+      "imports": [
+        "base64",
+        "django.core.files.base",
+        "django.db.models",
+        "django.http",
+        "django.shortcuts",
+        "rest_framework",
+        "rest_framework.decorators",
+        "rest_framework.parsers",
+        "rest_framework.response",
+        "djoser.views",
+        "api.filters",
+        "api.pagination",
+        "api.permissions",
+        "api.serializers",
+        "recipes.models",
+        "users.models"
+      ]
+    },
+    {
+      "relPath": "backend/foodgram/asgi.py",
+      "language": "py",
+      "symbols": [],
+      "imports": [
+        "os",
+        "django.core.asgi"
+      ]
+    },
+    {
+      "relPath": "backend/foodgram/settings.py",
+      "language": "py",
+      "symbols": [],
+      "imports": [
+        "os",
+        "pathlib",
+        "django.core.management.utils"
+      ]
+    },
+    {
+      "relPath": "backend/foodgram/urls.py",
+      "language": "py",
+      "symbols": [],
+      "imports": [
+        "django.contrib",
+        "django.urls",
+        "django.conf",
+        "django.conf.urls.static"
+      ]
+    },
+    {
+      "relPath": "backend/foodgram/wsgi.py",
+      "language": "py",
+      "symbols": [],
+      "imports": [
+        "os",
+        "django.core.wsgi"
+      ]
+    },
+    {
+      "relPath": "backend/manage.py",
+      "language": "py",
+      "symbols": [
+        "main"
+      ],
+      "imports": [
+        "os",
+        "sys"
+      ]
+    },
+    {
+      "relPath": "backend/recipes/admin.py",
+      "language": "py",
+      "symbols": [
+        "RecipeIngredientInline",
+        "TagAdmin",
+        "IngredientAdmin",
+        "RecipeAdmin",
+        "FavoriteAdmin",
+        "ShoppingCartAdmin"
+      ],
+      "imports": [
+        "django.contrib",
+        "django.contrib.admin",
+        "recipes.models"
+      ]
+    },
+    {
+      "relPath": "backend/recipes/apps.py",
+      "language": "py",
+      "symbols": [
+        "RecipesConfig"
+      ],
+      "imports": [
+        "django.apps"
+      ]
+    },
+    {
+      "relPath": "backend/recipes/management/commands/load_ingredients.py",
+      "language": "py",
+      "symbols": [
+        "Command"
+      ],
+      "imports": [
+        "json",
+        "os",
+        "django.core.management.base",
+        "recipes.models"
+      ]
+    },
+    {
+      "relPath": "backend/recipes/management/commands/load_test_data.py",
+      "language": "py",
+      "symbols": [
+        "Command"
+      ],
+      "imports": [
+        "django.core.management.base",
+        "django.contrib.auth",
+        "recipes.models"
+      ]
+    },
+    {
+      "relPath": "backend/recipes/migrations/0001_initial.py",
+      "language": "py",
+      "symbols": [
+        "Migration"
+      ],
+      "imports": [
+        "django.db.models.deletion",
+        "django.conf",
+        "django.db"
+      ]
+    },
+    {
+      "relPath": "backend/recipes/migrations/0002_alter_favorite_recipe_alter_favorite_user_and_more.py",
+      "language": "py",
+      "symbols": [
+        "Migration"
+      ],
+      "imports": [
+        "django.core.validators",
+        "django.db.models.deletion",
+        "django.conf",
+        "django.db"
+      ]
+    },
+    {
+      "relPath": "backend/recipes/migrations/0003_alter_favorite_recipe_alter_favorite_user_and_more.py",
+      "language": "py",
+      "symbols": [
+        "Migration"
+      ],
+      "imports": [
+        "django.db.models.deletion",
+        "django.conf",
+        "django.db"
+      ]
+    },
+    {
+      "relPath": "backend/recipes/models.py",
+      "language": "py",
+      "symbols": [
+        "Tag",
+        "Ingredient",
+        "Recipe",
+        "RecipeIngredient",
+        "UserRecipeRelation",
+        "Favorite",
+        "ShoppingCart"
+      ],
+      "imports": [
+        "django.conf",
+        "django.core.exceptions",
+        "django.core.validators",
+        "django.db",
+        "foodgram.constants"
+      ]
+    },
+    {
+      "relPath": "backend/users/admin.py",
+      "language": "py",
+      "symbols": [
+        "CustomUserAdmin"
+      ],
+      "imports": [
+        "django.contrib",
+        "django.contrib.auth.admin",
+        "users.models"
+      ]
+    },
+    {
+      "relPath": "backend/users/apps.py",
+      "language": "py",
+      "symbols": [
+        "UsersConfig"
+      ],
+      "imports": [
+        "django.apps"
+      ]
+    },
+    {
+      "relPath": "backend/users/migrations/0001_initial.py",
+      "language": "py",
+      "symbols": [
+        "Migration"
+      ],
+      "imports": [
+        "django.contrib.auth.models",
+        "django.contrib.auth.validators",
+        "django.utils.timezone",
+        "django.db"
+      ]
+    },
+    {
+      "relPath": "backend/users/migrations/0002_subscription.py",
+      "language": "py",
+      "symbols": [
+        "Migration"
+      ],
+      "imports": [
+        "django.db.models.deletion",
+        "django.conf",
+        "django.db"
+      ]
+    },
+    {
+      "relPath": "backend/users/migrations/0003_alter_subscription_author_alter_subscription_user.py",
+      "language": "py",
+      "symbols": [
+        "Migration"
+      ],
+      "imports": [
+        "django.db.models.deletion",
+        "django.conf",
+        "django.db"
+      ]
+    },
+    {
+      "relPath": "backend/users/models.py",
+      "language": "py",
+      "symbols": [
+        "User",
+        "Subscription"
+      ],
+      "imports": [
+        "django.contrib.auth.models",
+        "django.db",
+        "foodgram.constants"
+      ]
+    },
+    {
+      "relPath": "frontend/src/App.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react-router-dom",
+        "react",
+        "./components",
+        "./api",
+        "./styles.module.css",
+        "./contexts"
+      ]
+    },
+    {
+      "relPath": "frontend/src/App.test.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "@testing-library/react",
+        "./App"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/account/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css",
+        "react",
+        "../index.js",
+        "../../contexts",
+        "../../configs/navigation",
+        "../icons",
+        "../../images/userpic-icon.jpg",
+        "../avatar-popup",
+        "../../api"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/account-menu/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css",
+        "react",
+        "../index.js",
+        "../../contexts",
+        "react-router-dom",
+        "../../configs/navigation"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/account-menu-mobile/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css",
+        "react",
+        "../index.js",
+        "../../contexts",
+        "react-router-dom",
+        "../../configs/navigation"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/account-mobile/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css",
+        "react",
+        "../index.js",
+        "../../contexts",
+        "../../configs/navigation",
+        "../icons",
+        "../../images/userpic-icon.jpg",
+        "../avatar-popup",
+        "../../api"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/avatar-popup/index.js",
+      "language": "js",
+      "symbols": [
+        "AvatarPopup"
+      ],
+      "imports": [
+        "./styles.module.css",
+        "..",
+        "../../images/avatar-icon.png",
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/button/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "classnames",
+        "./style.module.css"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/card/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./style.module.css",
+        "react-tooltip",
+        "../index",
+        "../../contexts",
+        "react",
+        "classnames",
+        "../../images/userpic-icon.jpg"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/card-list/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./style.module.css"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/change-password-text/index.js",
+      "language": "js",
+      "symbols": [
+        "ChangePasswordText"
+      ],
+      "imports": [
+        "./style.module.css"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/checkbox/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "classnames",
+        "./styles.module.css",
+        "react",
+        "../index",
+        "../../utils"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/checkbox-group/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "classnames",
+        "./styles.module.css",
+        "react",
+        "../index"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/container/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./style.module.css",
+        "classnames"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/file-input/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react",
+        "./styles.module.css",
+        "../index",
+        "classnames",
+        "../icons",
+        "../../images/userpic-icon.jpg"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/footer/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./style.module.css",
+        "../index",
+        "../../images/logo-footer.png"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/form/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css",
+        "classnames"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/form-title/index.jsx",
+      "language": "jsx",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css",
+        "classnames"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/header/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./style.module.css",
+        "../index.js",
+        "../container",
+        "../../images/logo-header.png"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/add-avatar/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/add-user/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/arrow-expand/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/arrow-left/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/arrow-right/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/cart/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/check/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/delete-avatar/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/done/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./star",
+        "./star-active",
+        "./like",
+        "./like-active",
+        "./clock",
+        "./user",
+        "./check",
+        "./arrow-left",
+        "./arrow-right",
+        "./plus",
+        "./done",
+        "./ingredient-delete",
+        "./saved-menu",
+        "./subscriptions-menu",
+        "./logout-menu",
+        "./reset-password-menu",
+        "./cart",
+        "./add-user",
+        "./receipt-delete",
+        "./arrow-expand",
+        "./pagination-arrow",
+        "./popup-close",
+        "./add-avatar",
+        "./delete-avatar",
+        "./copy-link"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/ingredient-delete/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/like/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/like-active/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/logout-menu/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/pagination-arrow/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/plus/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/popup-close/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/receipt-delete/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/reset-password-menu/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/saved-menu/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/icons/subscriptions-menu/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./header",
+        "./footer",
+        "./link",
+        "./container",
+        "./main",
+        "./card",
+        "./card-list",
+        "./icons",
+        "./button",
+        "./title",
+        "./form",
+        "./protected-route",
+        "./input",
+        "./account-menu",
+        "./account-menu-mobile",
+        "./nav",
+        "./tag",
+        "./tags-container",
+        "./textarea",
+        "./checkbox",
+        "./checkbox-group",
+        "./pagination",
+        "./purchase",
+        "./purchase-list",
+        "./subscription",
+        "./subscription-list",
+        "./file-input",
+        "./ingredients-search",
+        "./form-title",
+        "./account",
+        "./account-mobile",
+        "./orders",
+        "./nav-menu",
+        "./popup"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/ingredients-search/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/input/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react",
+        "react-router-dom",
+        "./styles.module.css",
+        "classnames"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/link/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react",
+        "react-router-dom",
+        "./style.module.css",
+        "classnames"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/main/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react",
+        "./style.module.css",
+        "classnames"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/nav/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./style.module.css",
+        "react",
+        "../index.js",
+        "classnames",
+        "react-router-dom",
+        "../../images/hamburger-menu.png",
+        "../../images/hamburger-menu-close.png"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/nav-menu/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "../../configs/navigation",
+        "classnames",
+        "./style.module.css",
+        "react-router-dom",
+        "../index.js"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/notification/index.js",
+      "language": "js",
+      "symbols": [
+        "Notification"
+      ],
+      "imports": [
+        "../icons",
+        "./style.module.css",
+        "classnames"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/orders/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css",
+        ".."
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/pagination/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css",
+        "classnames",
+        "react",
+        ".."
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/popup/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css",
+        ".."
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/protected-route/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react",
+        "react-router-dom"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/purchase/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css",
+        "../index",
+        "react",
+        "classnames"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/purchase-list/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css",
+        "classnames",
+        "../index"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/subscription/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css",
+        "react",
+        "../index",
+        "../../images/userpic-icon.jpg"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/subscription-list/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css",
+        "../index"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/tag/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css",
+        "classnames"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/tags-container/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css",
+        "classnames",
+        "../index"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/textarea/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react",
+        "react-router-dom",
+        "./styles.module.css",
+        "classnames"
+      ]
+    },
+    {
+      "relPath": "frontend/src/components/title/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css",
+        "classnames"
+      ]
+    },
+    {
+      "relPath": "frontend/src/configs/navigation.js",
+      "language": "js",
+      "symbols": [
+        "UserMenu",
+        "NotLoggedInMenu"
+      ],
+      "imports": [
+        "../components/icons"
+      ]
+    },
+    {
+      "relPath": "frontend/src/contexts/auth-context.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/contexts/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./recipes-context",
+        "./auth-context",
+        "./user-context"
+      ]
+    },
+    {
+      "relPath": "frontend/src/contexts/recipes-context.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/contexts/user-context.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react",
+        "react-dom",
+        "./App",
+        "./reportWebVitals",
+        "react-router-dom"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/about/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "../../components",
+        "./styles.module.css",
+        "react-meta-tags"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/cart/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "../../components",
+        "./styles.module.css",
+        "../../utils/index.js",
+        "react",
+        "../../api",
+        "react-meta-tags"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/change-password/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "../../components",
+        "./styles.module.css",
+        "../../utils",
+        "../../contexts",
+        "react-router-dom",
+        "react",
+        "react-meta-tags",
+        "../../components/change-password-text"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/favorites/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "../../components",
+        "./styles.module.css",
+        "../../utils/index.js",
+        "react",
+        "../../api",
+        "react-meta-tags"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./main",
+        "./signin",
+        "./signup",
+        "./single-card",
+        "./recipe-edit",
+        "./cart",
+        "./favorites",
+        "./subscriptions",
+        "./recipe-create",
+        "./user",
+        "./change-password",
+        "./about",
+        "./technologies",
+        "./update-avatar",
+        "./password-reset",
+        "./not-found"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/main/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "../../components",
+        "./styles.module.css",
+        "../../utils/index.js",
+        "react",
+        "../../api",
+        "react-meta-tags"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/not-found/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "../../components",
+        "./styles.module.css",
+        "../../images/not-found.png",
+        "react-router-dom"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/password-reset/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "../../components",
+        "./styles.module.css",
+        "../../utils",
+        "react-meta-tags",
+        "../../contexts",
+        "react",
+        "react-router-dom"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/recipe-create/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "../../components",
+        "./styles.module.css",
+        "../../api",
+        "react",
+        "../../utils",
+        "react-router-dom",
+        "react-meta-tags",
+        "classnames"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/recipe-edit/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "../../components",
+        "./styles.module.css",
+        "../../api",
+        "react",
+        "../../utils",
+        "react-router-dom",
+        "react-meta-tags",
+        "classnames"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/signin/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "../../components",
+        "./styles.module.css",
+        "../../utils",
+        "../../contexts",
+        "react-router-dom",
+        "react",
+        "react-meta-tags"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/signup/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "../../components",
+        "./styles.module.css",
+        "../../utils",
+        "react-router-dom",
+        "react",
+        "../../contexts",
+        "react-meta-tags"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/single-card/description/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/single-card/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "react-tooltip",
+        "../../components",
+        "../../contexts",
+        "react",
+        "./styles.module.css",
+        "./ingredients",
+        "./description",
+        "classnames",
+        "react-router-dom",
+        "react-meta-tags",
+        "../../images/userpic-icon.jpg",
+        "../../utils/index.js",
+        "../../api",
+        "../../components/notification"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/single-card/ingredients/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./styles.module.css"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/subscriptions/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "../../components",
+        "../../utils",
+        "../../api",
+        "react",
+        "react-meta-tags"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/technologies/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "../../components",
+        "./styles.module.css",
+        "react-meta-tags"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/update-avatar/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "../../components",
+        "./styles.module.css",
+        "react-router-dom",
+        "react",
+        "../../contexts",
+        "react-meta-tags"
+      ]
+    },
+    {
+      "relPath": "frontend/src/pages/user/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "../../components",
+        "classnames",
+        "./styles.module.css",
+        "../../utils/index.js",
+        "react",
+        "../../api",
+        "react-router-dom",
+        "../../contexts",
+        "react-meta-tags",
+        "../../images/userpic-icon.jpg"
+      ]
+    },
+    {
+      "relPath": "frontend/src/reportWebVitals.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "web-vitals"
+      ]
+    },
+    {
+      "relPath": "frontend/src/utils/index.js",
+      "language": "js",
+      "symbols": [],
+      "imports": [
+        "./hex-to-rgba",
+        "./validation",
+        "./use-tags",
+        "./use-recipes",
+        "./use-recipe",
+        "./use-subscriptions"
+      ]
+    },
+    {
+      "relPath": "frontend/src/utils/use-recipe.js",
+      "language": "js",
+      "symbols": [
+        "useRecipe"
+      ],
+      "imports": [
+        "react",
+        "../api"
+      ]
+    },
+    {
+      "relPath": "frontend/src/utils/use-recipes.js",
+      "language": "js",
+      "symbols": [
+        "useRecipes"
+      ],
+      "imports": [
+        "react",
+        "./index.js",
+        "../api"
+      ]
+    },
+    {
+      "relPath": "frontend/src/utils/use-subscriptions.js",
+      "language": "js",
+      "symbols": [
+        "useRecipes"
+      ],
+      "imports": [
+        "react",
+        "./index.js",
+        "../api"
+      ]
+    },
+    {
+      "relPath": "frontend/src/utils/use-tags.js",
+      "language": "js",
+      "symbols": [
+        "useTags"
+      ],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "relPath": "frontend/src/utils/validation.js",
+      "language": "js",
+      "symbols": [
+        "useForm",
+        "useFormWithValidation"
+      ],
+      "imports": [
+        "react"
+      ]
+    }
+  ],
+  "totalFiles": 135,
+  "indexedFiles": 119,
+  "method": "regex",
+  "generatedAt": 1789198909154,
+  "merkleRoot": "7ddbe2953b74d7250cb6c87ecd0691ba2b1265b757a518561ca5b9fe8774a288"
+}

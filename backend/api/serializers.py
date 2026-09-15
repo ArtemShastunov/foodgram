@@ -67,7 +67,9 @@ class SubscriptionSerializer(UserSerializer):
             {
                 'id': recipe.id,
                 'name': recipe.name,
-                'image': recipe.image.url if recipe.image else '',
+                'image': (
+                    recipe.image.url if recipe.image else ''
+                ),
                 'cooking_time': recipe.cooking_time
             }
             for recipe in recipes

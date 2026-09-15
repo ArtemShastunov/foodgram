@@ -17,8 +17,7 @@ from api.serializers import (
     RecipeCreateSerializer,
     RecipeListSerializer,
     SubscriptionSerializer,
-    TagSerializer,
-    UserSerializer
+    TagSerializer
 )
 from recipes.models import (
     Favorite, Ingredient, Recipe, RecipeIngredient, ShoppingCart, Tag
@@ -44,7 +43,12 @@ def avatar(request):
 
     if request.method == 'GET':
         return Response(
-            {'avatar': request.user.avatar.url if request.user.avatar else None},
+            {
+                'avatar': (
+                    request.user.avatar.url
+                    if request.user.avatar else None
+                )
+            },
             status=status.HTTP_200_OK
         )
 
@@ -67,7 +71,12 @@ def avatar(request):
         request.user.avatar = avatar_data
         request.user.save()
         return Response(
-            {'avatar': request.user.avatar.url if request.user.avatar else None},
+            {
+                'avatar': (
+                    request.user.avatar.url
+                    if request.user.avatar else None
+                )
+            },
             status=status.HTTP_200_OK
         )
 
