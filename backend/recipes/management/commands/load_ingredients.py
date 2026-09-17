@@ -12,10 +12,7 @@ class Command(BaseCommand):
     help = f'Load ingredients from {FILE_PATH}'
 
     def handle(self, *args, **kwargs):
-        file_path = FILE_PATH
-        if not os.path.exists(file_path):
-            file_path = os.path.join('..', 'data', 'ingredients.json')
-        with open(file_path, 'r', encoding='utf-8') as f:
+        with open(FILE_PATH, 'r', encoding='utf-8') as f:
             ingredients = json.load(f)
         for item in ingredients:
             Ingredient.objects.get_or_create(

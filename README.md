@@ -1,3 +1,5 @@
+# Foodgram
+
 [![CI/CD](https://github.com/ArtemShastunov/foodgram/actions/workflows/main.yml/badge.svg)](https://github.com/ArtemShastunov/foodgram/actions/workflows/main.yml)
 
 Продуктовый помощник — сайт, на котором пользователи публикуют рецепты, добавляют чужие рецепты в избранное, подписываются на авторов и формируют список покупок.
@@ -50,6 +52,10 @@ python manage.py migrate
 
 bash
 python manage.py load_ingredients
+Загрузите тестовые данные:
+
+bash
+python manage.py load_test_data
 Запустите сервер:
 
 bash
@@ -82,6 +88,11 @@ docker exec infra-backend-1 python manage.py load_test_data
 
 bash
 docker exec -it infra-backend-1 python manage.py createsuperuser
+Очистить базу данных:
+
+bash
+cd infra
+./clear_db.sh
 Проект будет доступен по адресу http://localhost.
 
 Примеры запросов к API
@@ -109,8 +120,8 @@ GET /api/recipes/
 text
 GET /api/recipes/?tags=breakfast&tags=lunch
 Документация
-- [Спецификация API](http://158.160.138.144/api/docs/)
-- [Развернутый проект](http://158.160.138.144)
+- [Спецификация API](http://158.160.144.189/api/docs/)
+- [Развернутый проект](http://158.160.144.189)
 
 Автор
 Артём Шастунов
