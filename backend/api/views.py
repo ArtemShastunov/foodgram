@@ -36,7 +36,7 @@ class UserViewSet(DjoserUserViewSet):
     pagination_class = PageLimitPagination
 
     def get_permissions(self):
-        if self.action == 'me':
+        if self.action in ['me', 'subscriptions', 'subscribe', 'avatar']:
             return [permissions.IsAuthenticated()]
         return [permissions.AllowAny()]
 
