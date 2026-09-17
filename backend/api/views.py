@@ -89,8 +89,8 @@ class UserViewSet(DjoserUserViewSet):
         methods=['post', 'delete'],
         permission_classes=[permissions.IsAuthenticated]
     )
-    def subscribe(self, request, pk=None):
-        author = get_object_or_404(User, pk=pk)
+    def subscribe(self, request, id=None):
+        author = get_object_or_404(User, pk=id)
         if request.method == 'POST':
             if author == request.user:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
