@@ -3,8 +3,8 @@ from django.core.validators import MinValueValidator
 from django.db import models
 
 from foodgram.constants import (
+    INGREDIENT_MEASUREMENT_UNIT_MAX_LENGTH,
     INGREDIENT_NAME_MAX_LENGTH,
-    INGREDIENT_UNIT_MAX_LENGTH,
     MIN_AMOUNT,
     MIN_COOKING_TIME,
     RECIPE_NAME_MAX_LENGTH,
@@ -40,7 +40,7 @@ class Ingredient(models.Model):
     )
     measurement_unit = models.CharField(
         'Единица измерения',
-        max_length=INGREDIENT_UNIT_MAX_LENGTH
+        max_length=INGREDIENT_MEASUREMENT_UNIT_MAX_LENGTH
     )
 
     class Meta:

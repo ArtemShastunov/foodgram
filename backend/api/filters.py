@@ -1,12 +1,15 @@
 import django_filters
+from django_filters.rest_framework import BooleanFilter
+
 from recipes.models import Recipe
 
 
 class RecipeFilter(django_filters.FilterSet):
-    author = django_filters.NumberFilter(field_name='author__id')
-    tags = django_filters.CharFilter(method='filter_tags')
-    is_favorited = django_filters.CharFilter(method='filter_is_favorited')
-    is_in_shopping_cart = django_filters.CharFilter(
+    tags = django_filters.AllValuesMultipleFilter(
+        field_name='tags__slug'
+    )
+    is_favorited = BooleanFilter(method='filter_is_favorited')
+    is_in_shopping_cart = BooleanFilter(
         method='filter_is_in_shopping_cart'
     )
 
@@ -14,24 +17,12 @@ class RecipeFilter(django_filters.FilterSet):
         model = Recipe
         fields = ['author', 'tags']
 
-    def filter_tags(self, queryset, name, value):
-        tags = self.request.query_params.getlist('tags')
-        if tags:
-            return queryset.filter(tags__slug__in=tags).distinct()
-        return queryset
-
     def filter_is_favorited(self, queryset, name, value):
-        if (
-            value in ['1', 'true', 'True']
-            and self.request.user.is_authenticated
-        ):
+        if value and self.request.user.is_authenticated:
             return queryset.filter(favorites__user=self.request.user)
         return queryset
 
     def filter_is_in_shopping_cart(self, queryset, name, value):
-        if (
-            value in ['1', 'true', 'True']
-            and self.request.user.is_authenticated
-        ):
+        if value and self.request.user.is_authenticated:
             return queryset.filter(shopping_carts__user=self.request.user)
         return queryset
